@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cat and Dog Classifier - Predict</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .prediction-result {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 20px;
+        }
+        .prediction-card {
+            width: 18rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container text-center mt-5">
+        <h1 class="display-4">Upload an Image to Predict</h1>
+        <form action="/predict" method="post" enctype="multipart/form-data" class="mt-4">
+            <div class="form-group">
+                <input type="file" name="file" accept="image/*" class="form-control-file" required>
+            </div>
+            <button type="submit" class="btn btn-success btn-lg">Upload and Predict</button>
+        </form>
+
+        {% if prediction %}
+        <div class="prediction-result">
+            <div class="card prediction-card">
+                <img src="{{ url_for('static', filename='uploads/' + filename) }}" class="card-img-top" alt="Uploaded Image">
+                <div class="card-body">
+                    <h5 class="card-title">Prediction Result:</h5>
+                    <p class="card-text">The image is classified as: <strong>{{ prediction }}</strong></p>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+
+        <a href="/" class="btn btn-primary mt-4">Back to Home</a>
+    </div>
+</body>
+</html>
